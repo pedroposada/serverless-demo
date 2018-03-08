@@ -1,7 +1,6 @@
 # Serverless demo app (AWS)
 
-![favico](client/public/favicon-32x32.png)
-## [Live demo](https://notes.pedroposada.be/)
+![favicon](client/public/favicon-16x16.png) [Live demo](https://notes.pedroposada.be/)
 
 ## AWS services used in this demo
   - API Gateway
