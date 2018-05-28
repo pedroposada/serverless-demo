@@ -20,6 +20,18 @@
   - Hosted client in S3 via CloudFront and Route 53
   - User authentication built with Cognito User Pool and Federated Identities
 
+## Test Lambda Functions
+You will need calid AWS credentials in your .aws file
+```
+cd api // go into the api folder
+
+sls invoke local -f create -p mocks/create-event.json;
+sls invoke local -f get -p mocks/get-event.json;
+sls invoke local -f list -p mocks/list-event.json;
+sls invoke local -f update -p mocks/update-event.json;
+sls invoke local -f delete -p mocks/delete-event.json;
+```
+
 ## Notes
   - Its very important to use the same REGION for all services
   - Handy snippet to unblock lambdas
@@ -32,4 +44,4 @@
       ...
     };
     ```
-  - Base this demo from this [tutorial](https://serverless-stack.com/#table-of-contents)
+  - Demo based on [tutorial](https://serverless-stack.com/#table-of-contents)

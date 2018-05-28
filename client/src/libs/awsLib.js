@@ -18,14 +18,14 @@ export async function authUser() {
     return false;
   }
 
-  const userToken = await getUserToken(currentUser);
+  const userToken = await getIdToken(currentUser);
 
   await getAwsCredentials(userToken);
 
   return true;
 }
 
-function getUserToken(currentUser) {
+function getIdToken(currentUser) {
   return new Promise((resolve, reject) => {
     currentUser.getSession(function(err, session) {
       if (err) {
@@ -87,6 +87,8 @@ export async function invokeApig({
   if (!await authUser()) {
     throw new Error("User is not logged in");
   }
+  const currentUser = getCurrentUser();
+  const idToken = await getIdToken(currentUser);
 
   const signedRequest = sigV4Client
     .newClient({
@@ -99,7 +101,10 @@ export async function invokeApig({
     .signRequest({
       method,
       path,
-      headers,
+      headers: {
+        ...headers,
+        'Authorization': `Bearer ${idToken}`
+      },
       queryParams,
       body
     });
