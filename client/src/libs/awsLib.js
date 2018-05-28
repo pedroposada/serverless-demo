@@ -101,21 +101,18 @@ export async function invokeApig({
     .signRequest({
       method,
       path,
-      headers: {
-        ...headers,
-        'Authorization': `Bearer ${idToken}`
-      },
+      headers,
       queryParams,
       body
     });
-
-  body = body ? JSON.stringify(body) : body;
-  headers = signedRequest.headers;
-
-  const results = await fetch(signedRequest.url, {
-    method,
-    headers,
-    body
+    
+    body = body ? JSON.stringify(body) : body;
+    headers = signedRequest.headers;
+    
+    const results = await fetch(signedRequest.url, {
+      method,
+      headers,
+      body
   });
 
   if (results.status !== 200) {
